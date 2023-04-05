@@ -44,3 +44,13 @@ for ind in selected_indicators:
     plt.title(ind)
     plt.xlabel('2005-2021')
     plt.show()
+
+for ind in selected_indicators:
+    df_year, df_country = data_ingestion(df, ind)
+    for i in countries:
+        plt.plot(df_country[i], label=i)
+
+    plt.title(ind)
+    plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+    plt.xticks(rotation=90)
+    plt.show()
