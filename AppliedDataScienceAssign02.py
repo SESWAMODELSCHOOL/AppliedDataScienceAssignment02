@@ -54,3 +54,19 @@ for ind in selected_indicators:
     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
     plt.xticks(rotation=90)
     plt.show()
+
+df1 = df.groupby(['Country Name','Indicator Name'])['mean'].mean().unstack()
+
+plt.figure(figsize=(10,7))
+sns.heatmap(df1[selected_indicators].corr(), cmap='viridis', linewidths=.5, annot=True)
+
+
+
+
+# ## Correlation Graph of Countries for "Arable Land" Indicator
+
+df_year, df_country = data_ingestion(df, 'Arable land (% of land area)')
+
+plt.figure(figsize=(10,7))
+sns.heatmap(df_country[countries].corr(), cmap='viridis', linewidths=.5, annot=True)
+
