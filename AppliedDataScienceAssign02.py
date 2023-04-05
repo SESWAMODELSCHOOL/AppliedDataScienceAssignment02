@@ -21,3 +21,13 @@ selected_indicators = ['Urban population (% of total population)', 'Urban popula
 
 countries = ['Italy','Australia','China','United Arab Emirates','Germany','France',
              'Malaysia','Japan','New Zealand','Morocco','United States','Pakistan','India','Bangladesh','Thailand']
+
+df = df.drop(['Country Code','Indicator Code'], axis=1)
+
+def data_ingestion(df, indicator):
+    df1 = df[df['Indicator Name'] == indicator]
+    df1 = df1.drop(['Indicator Name'], axis=1)
+    df1.index = df1.loc[:, 'Country Name']
+    df1 = df1.drop(['Country Name'], axis=1)
+    df2 = df1.transpose()
+    return df1, df2
