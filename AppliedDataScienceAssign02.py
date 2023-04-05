@@ -31,3 +31,16 @@ def data_ingestion(df, indicator):
     df1 = df1.drop(['Country Name'], axis=1)
     df2 = df1.transpose()
     return df1, df2
+
+#df_year, df_country = data_ingestion(df, 'Population, total')
+
+
+for ind in selected_indicators:
+    df_year, df_country = data_ingestion(df, ind)
+    
+    for i in df_year.columns:
+        sns.swarmplot(y='Country Name',x=i, data=df_year.loc[countries, :].reset_index())
+    
+    plt.title(ind)
+    plt.xlabel('2005-2021')
+    plt.show()
