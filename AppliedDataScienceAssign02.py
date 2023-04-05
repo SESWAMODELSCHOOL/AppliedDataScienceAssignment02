@@ -70,3 +70,17 @@ df_year, df_country = data_ingestion(df, 'Arable land (% of land area)')
 plt.figure(figsize=(10,7))
 sns.heatmap(df_country[countries].corr(), cmap='viridis', linewidths=.5, annot=True)
 
+# getting data ready. removing some Regions and join data to get only the countries data.
+
+df2 = df1.merge(dfc1, left_on=df1.index, right_on='TableName', how='inner')
+df2.index = df2['TableName']
+
+
+for i in df2[selected_indicators]:
+    sns.barplot(x='TableName', y=i, data=df2[i].sort_values(ascending=False)[:10].reset_index())
+    plt.xticks(rotation=90)
+    plt.xlabel(i)
+    plt.title('Top 10 countries with respect to ' + str(i))
+    plt.show()
+
+
